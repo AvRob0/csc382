@@ -1,0 +1,115 @@
+#include <iostream>
+#include <string>
+
+struct node {
+	std::string data;
+	node* next;
+};
+
+//global variables
+node* head = NULL;
+node* current = NULL;
+
+//function prototypes for the menu with node and pntr head as arguments
+void createList(node *head);
+void displayList(node *head);
+
+int main() {
+	//the data types to store the user input
+	std::string p;
+	int choice{};
+	int con{};
+	//creating the new node
+	node* head = new node;
+	head->next = NULL;
+	//the do loop for the welcome menu
+	do {
+		std::cout << "Welcome Please Make a Selection " << std::endl;
+		std::cout << "1. Create a Link List " << std::endl;
+		std::cout << "0. Exit " << std::endl;
+		//the getline keyword to get user input 
+		std::getline(std::cin, p);
+		/*the if, else if statement getting the user choice
+		and does one of two choices*/
+		if (p == "1" || p == "0") {
+			choice = std::stoi(p);
+			if (choice == 1) {
+				createList(head);
+			}
+			else if (choice == 0) {
+				std::cout << " Exit initiated " << std::endl;
+				return 0;
+			}
+		}
+	} while (choice != 1 && choice != 0);
+	//the if statement the if the the list is create will show after creation
+	if(choice == 1){
+		std::cout << " LIST HAS BEEN CREATED. " << std::endl;
+	}
+	//the while loop that shows a new menu for user after the creation of the linked list until exit is initiated
+	while (choice == 1 && choice != 0) {
+		do {
+			std::cout << "" << std::endl;
+			std::cout << " 2. Add to list " << std::endl;
+			std::cout << " 3. Display List " << std::endl;
+			std::cout << " 0. Exit " << std::endl;
+			std::getline(std::cin, p);
+			if (p == "2" || p == "3" || p == "0") { 
+				/*with this if statement and with stoi() keyword,
+				tried to make it so only the given inputs works and repeat if invalid 
+				input is given. But it dont work and coudnt figure out how to make it repeat
+				thats why I have it return the variables at the end of main function.
+				And just left it.
+				*/
+				con = std::stoi(p);
+				if (con == 2) {
+					createList(head);
+				}
+				if (con == 3) {
+					displayList(head);
+				}
+				else if (con == 0) {
+					std::cout << " Exit initiated " << std::endl;
+					return 0;
+				}
+			}
+			if (con == 2) {
+				std::cout << " List has been updated " << std::endl;
+			}
+
+		} while (con != 0);
+		
+	}
+	return choice, con;
+}
+//the function definitions for the  prototypes
+void createList(node *head)
+{
+	std::string cl;
+	std::cout << " Add to list " << std::endl;
+	std::getline(std::cin, cl);
+	//creating new node
+	current = new node;
+	current->data = cl;
+	//placing the new node after the empty head
+	current->next = head->next;
+	head -> next = current;
+	return;
+}
+
+void displayList(node *head)
+{
+	
+	if (!head->next) {
+
+		std::cout << "List has not been created. " << std::endl;
+		return;
+	}
+
+	node* current;
+	current = head->next;
+	while (current) {
+		std::cout << current->data << std::endl;
+		current = current->next;
+	}
+}
