@@ -1,0 +1,127 @@
+/*Avery Robinson ----------------- csc382 --------------- Stack and Queue program text messages display link list*/
+#include <iostream>
+#include <string>
+#include <stack>
+//The library
+
+/*I still couldnt figure out how to make the menu repeat when incorrect key is given.*/
+
+
+//node structure
+struct node {
+	//data attribute to store the information
+	std::string data;
+	node* next;
+};
+
+//empty global variables
+node* head = NULL;
+node* current = NULL;
+//function prototypes
+void displayList(node* head);
+void DisplayMessages(node* head);
+
+//main function
+int main() {
+	//string and int varibales for storing the choice for menu
+	std::string l;
+	int choice{};
+	
+	//node pointing to new node for storing data 
+	node* head = new node;
+	head->next = NULL;
+
+	//do loop with the menu dispaly
+	do{
+		std::cout << " Welcome to the stack and Queue test display. " << std::endl;
+		std::cout << " 1.Display List - The stack. " << std::endl;
+		std::cout << " 2. Display Messages - The Queue. " << std::endl;
+		std::cout << " 0. Exit " << std::endl;
+		std::getline(std::cin, l);
+		//if statement for choices of the menu
+		if (l == "1" || l == "2" || l == "0") {
+			choice = std::stoi(l);
+			if (choice == 1) {
+				displayList(head);
+
+			}
+			if (choice == 2) {
+				DisplayMessages(head);
+			}
+			else if (choice == 0) {
+				std::cout << " BYE " << std::endl;
+			}
+			else if (choice != 0 && choice != 1 && choice != 2) {
+				std::cout << " INCORRECT KEY " << std::endl;
+
+			}
+		}
+	} while (choice != 0);
+	return 0;
+}
+//prototypes declarations
+void displayList(node* head) {
+
+	//creation of stack 
+	std::stack<std::string> list_of_text;
+
+	list_of_text.push(" Avery: Hey wussup ");
+	list_of_text.push(" Damien: Sup ");
+	list_of_text.push(" Avery: wyd u at the house im bout to come by ");
+	list_of_text.push(" Damien: Im bout to be there in a min just a few mins out, why  ");
+	list_of_text.push(" Avery: Ok I got something to show you this is crazy ");
+	list_of_text.push(" Damien: It aint nothing bad is it?");
+	list_of_text.push(" Avery: lol naw it nothing bad Its just exciting");
+	list_of_text.push(" Damien: Where you at right now? I can meet up with you now if you want.");
+	list_of_text.push(" Avery: Im driving down veterans now Im not to far from ur house n plus I wanted to prob chill at ur house if that coo.");
+	list_of_text.push(" Damien: Come on now, u know you welcome anytime.. Im right up the street on my way back now though. ");
+	list_of_text.push(" Avery: ok fasho already know, I guess I see you in a min, how u been today and what you been up too. ");
+	list_of_text.push(" Damien: Just trying to keep my head straight, been reading this book.. It's pretty decent actually.  How's everything on your end? ");
+	list_of_text.push(" Avery: Thats good I already know how it is, its going to get better.. what book your reading.. n everthings good with me.");
+	list_of_text.push(" Damien: One of those self improvement books, on dealing with spiritual warfare.  You're the book guru though, any good books you working on?");
+	list_of_text.push(" Avery: o Ok.. sounds like a good book, I might have to check that book out. lol I just know about books that Im interested in..");
+	list_of_text.push(" Damien: Well I hope you're not interested in texting and driving (better be using that voice text) for all this texting lol");
+	list_of_text.push(" Avery: lol..no Im not txtn and driving and Im using my new AI I just programmed for my car to write my messages for me.");
+	list_of_text.push(" Damien: Cool because I'm just getting back home - you getting close? ");
+	list_of_text.push(" Avery: Ok, yea im bout to pull up in a min see u in a min.");
+	list_of_text.push(" Damien: Ok see you in a min ");
+
+	std::cout << " List of Text as Stack:  " << std::endl;
+	while (!list_of_text.empty()) {
+		std::cout << list_of_text.top() << std::endl;;
+		list_of_text.pop();
+	}
+
+	
+}
+void DisplayMessages(node* head) {
+	//2 dimensional string array to hold messages 
+	std::string display_list[20][1] = {
+		{" Avery: Hey wussup "},
+		{" Damien: Sup "},
+		{" Avery: wyd u at the house im bout to come by "},
+		{" Damien: Im bout to be there in a min just a few mins out, why  "},
+		{" Avery: Ok I got something to show you this is crazy "},
+		{" Damien: It aint nothing bad is it?"},
+		{" Avery: lol naw it nothing bad Its just exciting"},
+		{" Damien: Where you at right now? I can meet up with you now if you want."},
+		{" Avery: Im driving down veterans now Im not to far from ur house n plus I wanted to prob chill at ur house if that coo."},
+		{" Damien: Come on now, u know you welcome anytime.. Im right up the street on my way back now though. "},
+		{" Avery: ok fasho already know, I guess I see you in a min, how u been today and what you been up too. "},
+		{" Damien: Just trying to keep my head straight, been reading this book.. It's pretty decent actually.  How's everything on your end? "},
+		{" Avery: Thats good I already know how it is, its going to get better.. what book your reading.. n everthings good with me."},
+		{" Damien: One of those self improvement books, on dealing with spiritual warfare.  You're the book guru though, any good books you working on?"},
+		{" Avery: o Ok.. sounds like a good book, I might have to check that book out. lol I just know about books that Im interested in.."},
+		{" Damien: Well I hope you're not interested in texting and driving (better be using that voice text) for all this texting lol"},
+		{" Avery: lol..no Im not txtn and driving and Im using my new AI I just programmed for my car to write my messages for me."},
+		{" Damien: Cool because I'm just getting back home - you getting close? "},
+		{" Avery: Ok, yea im bout to pull up in a min see u in a min."},
+		{" Damien: Ok see you in a min "}
+	};
+	//for loop to display the messages in order
+	for (int i = 0; i < 20; i++) {
+		for (int j = 0; j < 1; j++) {
+			std::cout << display_list[i][j] << std::endl;
+		}
+	}
+}
